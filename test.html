@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doggywala - Find Your Perfect Puppy</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-orange: #FF6B35;
+            --secondary-blue: #4A90E2;
+            --dark-bg: #2C3E50;
+            --light-bg: #F8F9FA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .navbar {
+            background: var(--dark-bg);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-orange) !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: white !important;
+            font-weight: 500;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--primary-orange) !important;
+        }
+
+        .contact-info {
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .contact-info i {
+            color: var(--primary-orange);
+            margin-right: 0.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #34495e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="20" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="30" cy="90" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="70" cy="70" r="1.2" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #ecf0f1;
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary-custom {
+            background: var(--primary-orange);
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary-custom:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .hero-image {
+            position: relative;
+            animation: bounce 3s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .hero-image img {
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background: var(--light-bg);
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 2rem;
+            border: none;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-orange);
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--dark-bg);
+            margin-bottom: 1rem;
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: 20px;
+            bottom: 20px;
+            background: var(--secondary-blue);
+            border-radius: 20px;
+            z-index: -1;
+        }
+
+        .about-image img {
+            border-radius: 15px;
+            width: 100%;
+            height: auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--dark-bg);
+            margin-bottom: 2rem;
+        }
+
+        .highlight {
+            color: var(--primary-orange);
+        }
+
+        /* Puppy Cards */
+        .puppies-section {
+            padding: 5rem 0;
+            background: var(--light-bg);
+        }
+
+        .puppy-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .puppy-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .puppy-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .puppy-card-body {
+            padding: 1.5rem;
+        }
+
+        .puppy-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--dark-bg);
+            margin-bottom: 0.5rem;
+        }
+
+        .puppy-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn-outline-custom {
+            border: 2px solid var(--primary-orange);
+            color: var(--primary-orange);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn-outline-custom:hover {
+            background: var(--primary-orange);
+            color: white;
+            text-decoration: none;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: var(--dark-bg);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-orange);
+            margin-top: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a252f;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: var(--primary-orange);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #bdc3c7;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-orange);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-orange);
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.1);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #34495e;
+            color: #95a5a6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .contact-info {
+                display: none;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-orange);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <i class="fas fa-paw"></i> Doggywala
+            </a>
+            
+            <div class="contact-info d-none d-md-block">
+                <i class="fas fa-map-marker-alt"></i> Pet / Dog Breeder in India
+                <i class="fas fa-envelope ms-3"></i> info@doggywala.com
+                <i class="fas fa-phone ms-3"></i> 9823214651
+            </div>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#puppies">Puppies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1 class="hero-title fade-in">If you are a fellow dog lover thinking about bringing the <span class="highlight">most beautiful puppy</span> home, this is just the place for you!</h1>
+                    <p class="hero-subtitle fade-in">Find your perfect companion from our carefully selected puppies. We connect loving families with healthy, happy puppies.</p>
+                    <button class="btn btn-primary-custom fade-in" onclick="scrollToSection('puppies')">
+                        <i class="fas fa-heart"></i> Find Your Puppy
+                    </button>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <div class="hero-image fade-in">
+                        <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?w=500&h=600&fit=crop&crop=face" alt="Beautiful Puppy" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3 class="feature-title">Post Sell - Support</h3>
+                        <p>Quick turnaround for queries. We provide ongoing support even after you take your puppy home.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3 class="feature-title">We Believe</h3>
+                        <p>Client Satisfaction is our priority. Every puppy deserves a loving home and every family deserves the perfect companion.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3 class="feature-title">Buy Puppies Here</h3>
+                        <p>We are here for you. Browse our available puppies and find your perfect match with complete transparency.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="about-text fade-in">
+                        <h2 class="section-title">We Help You Buy <span class="highlight">Puppies</span> - Puppies for sale in Pune</h2>
+                        <p>Happiness comes in four legs, has a furry body and a joyfully wagging tail! Dogs are one of the most preferred animals when it comes to having pets. According to pet statistics, the number of pet dogs in India is recorded as high as 18.5 million in 2019! Moreover, this population is expected to increase to a whopping 31 million (and owned by the end of 2023).</p>
+                        <p>This clearly indicates that India loves having furry friends as pets. Who wouldn't want to associate friend that is a constant companion, acts as a personal therapist, protects you from danger and is loyal without any conditions?</p>
+                        <p>If you are a fellow dog lover thinking about bringing the most beautiful puppy home, this is just the place for you!</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-image fade-in">
+                        <img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=500&h=400&fit=crop" alt="Happy Dog" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Puppies Section -->
+    <section id="puppies" class="puppies-section">
+        <div class="container">
+            <h2 class="section-title text-center fade-in">
+                <span class="highlight">Puppies available</span> for sale in pune
+            </h2>
+            
+            <div class="row" id="puppies-container">
+                <!-- Puppy cards will be loaded here -->
+            </div>
+            
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Loading more puppies...</p>
+            </div>
+            
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-custom" onclick="loadMorePuppies()">
+                    VIEW ALL PUPPIES
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="cta">
+        <div class="container">
+            <h2 class="cta-title fade-in">Ready to Find Your Perfect Companion?</h2>
+            <p class="fade-in">If you are still confused about buying puppies for sale in Pune, we are always here to help you. Just get in touch with us today and our team will help you to understand our breeding services and our role as dog breeders.</p>
+            <div class="contact-number fade-in">
+                <i class="fas fa-phone"></i> OUR CONTACT NUMBER IS
+                <div style="margin-top: 1rem;">9823214651</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4><i class="fas fa-paw"></i> Doggywala</h4>
+                    <p>Your trusted partner in finding the perfect puppy companion. We connect loving families with healthy, happy puppies from responsible breeders.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <p><a href="#home">Home</a></p>
+                    <p><a href="#about">About Us</a></p>
+                    <p><a href="#puppies">Available Puppies</a></p>
+                    <p><a href="#contact">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Pet / Dog Breeder in India</p>
+                    <p><i class="fas fa-envelope"></i> info@doggywala.com</p>
+                    <p><i class="fas fa-phone"></i> 9823214651</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <p>Puppy Sales</p>
+                    <p>Post-Sale Support</p>
+                    <p>Breeding Services</p>
+                    <p>Pet Care Advice</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Doggywala. All rights reserved. Made with <i class="fas fa-heart text-danger"></i> for dog lovers.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Puppy data
+        const puppies = [
+            {
+                name: "Beagle",
+                description: "If you are looking for a friendly and playful pooch that can bond well with your family, you can look for the Beagle puppies for sale in Pune on our website.",
+                image: "https://images.unsplash.com/photo-1551717743-49959800b1f6?w=300&h=200&fit=crop"
+            },
+            {
+                name: "Doberman",
+                description: "We have the most adorable Doberman puppies for sale in Pune. You can take them home if you are willing to get a dog that is equal parts playful, sweet and protective.",
+                image: "https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=300&h=200&fit=crop"
+            },
+            {
+                name: "German Shepherd",
+                description: "Everybody loves the beautiful German Shepherd! On purchasing our German Shepherd puppies for sale in Pune, you get a beautiful loyal that is athletic, playful, sweet and intelligent.",
+                image: "https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?w=300&h=200&fit=crop"
+            },
+            {
+                name: "Golden Retriever",
+                description: "If you are willing to be secure and sweet over by beautiful fluff and 'sunny dog eyes', have a look and choose from our limited Golden Retriever puppies for sale in Pune.",
+                image: "https://images.unsplash.com/photo-1552053831-71594a27632d?w=300&h=200&fit=crop"
+            },
+            {
+                name: "Labrador Retriever",
+                description: "This is the 'Mr. Personality' here. Even if you don't get the name, our Labrador puppies for sale in Pune are bound to leave you with their playful habits, intelligent nature and unwavering loyalty.",
+                image: "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=300&h=200&fit=crop"
+            },
+            {
+                name: "Pomeranians",
+                description: "If you are interested in getting a cute ball of fur for a dog, you can check out our Pomeranian puppies for sale in Pune. These tiny dogs pack quite a punch in their no-nonsense attitude and compact size.",
+                image: "https://images.unsplash.com/photo-1605568427561-40dd23c2acea?w=300&h=200&fit=crop"
+            },
+            {
+                name: "Rottweilers",
+                description: "The Rottweiler puppies for sale, offered by the sellers, are incredibly loyal with a strong sense of devotion and strength and sweetness. They sport a muscular build with a playful attitude.",
+                image: "https://images.unsplash.com/photo-1567752881298-894bb81f9379?w=300&h=200&fit=crop"
+            },
+            {
+                name: "Siberian Husky",
+                description: "Check out our Siberian Husky puppies for sale to bring home some beautiful furry creatures. You are bound to get all the attention wherever you go with these elegant and good-looking precious pooches.",
+                image: "https://images.unsplash.com/photo-1605568427561-40dd23c2acea?w=300&h=200&fit=crop"
+            }
+        ];
+
+        let currentPuppies = 0;
+        const puppiesPerLoad = 6;
+
+        // Load puppies
+        function loadPuppies() {
+            const container = document.getElementById('puppies-container');
+            const loading = document.getElementById('loading');
+            
+            loading.style.display = 'block';
+            
+            setTimeout(() => {
+                const endIndex = Math.min(currentPuppies + puppiesPerLoad, puppies.length);
+                
+                for (let i = currentPuppies; i < endIndex; i++) {
+                    const puppy = puppies[i];
+                    const puppyCard = createPuppyCard(puppy);
+                    container.appendChild(puppyCard);
+                }
+                
+                currentPuppies = endIndex;
+                loading.style.display = 'none';
+                
+                // Add fade-in animation
+                setTimeout(() => {
+                    const newCards = container.querySelectorAll('.puppy-card:not(.fade-in)');
+                    newCards.forEach(card => {
+                        card.classList.add('fade-in');
+                        setTimeout(() => card.classList.add('active'), 100);
+                    });
+                }, 100);
+            }, 1000);
+        }
+
+        // Create puppy card
+        function createPuppyCard(puppy) {
+            const col = document.createElement('div');
+            col.className = 'col-lg-4 col-md-6 mb-4';
+            
+            col.innerHTML = `
+                <div class="puppy-card">
+                    <img src="${puppy.image}" alt="${puppy.name}">
+                    <div class="puppy-card-body">
+                        <h5 class="puppy-name">${puppy.name}</h5>
+                        <p class="puppy-description">${puppy.description}</p>
+                        <a href="#contact" class="btn-outline-custom">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            `;
+            
+            return col;
+        }
+
+        // Load more puppies
+        function loadMorePuppies() {
+            if (currentPuppies < puppies.length) {
+                loadPuppies();
+            }
+        }
+
+        // Smooth scrolling
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const navbarHeight = document.querySelector('.navbar').offsetHeight;
+            const sectionTop = section.offsetTop - navbarHeight;
+            
+            window.scrollTo({
+                top: sectionTop,
+                behavior: 'smooth'
+            });
+        }
+
+        // Scroll animation
+        function handleScrollAnimation() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight * 0.8) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        // Update navbar on scroll
+        function updateNavbar() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(44, 62, 80, 0.95)';
+                navbar.style.backdropFilter = 'blur(10px)';
+            } else {
+                navbar.style.background = 'var(--dark-bg)';
+                navbar.style.backdropFilter = 'none';
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPuppies();
+            handleScrollAnimation();
+            
+            // Add smooth scrolling to nav links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const navbarHeight = document.querySelector('.navbar').offsetHeight;
+                        const targetTop = target.offsetTop - navbarHeight;
+                        window.scrollTo({
+                            top: targetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+
+        // Event listeners
+        window.addEventListener('scroll', () => {
+            handleScrollAnimation();
+            updateNavbar();
+        });
+
+        // Add some interactive effects
+        document.addEventListener('mouseover', function(e) {
+            if (e.target.closest('.puppy-card')) {
+                e.target.closest('.puppy-card').style.transform = 'translateY(-10px) scale(1.02)';
+            }
+        });
+
+        document.addEventListener('mouseout', function(e) {
+            if (e.target.closest('.puppy-card')) {
+                e.target.closest('.puppy-card').style.transform = 'translateY(0) scale(1)';
+            }
+        });
+
+        // Add click effect to buttons
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.btn-primary-custom') || e.target.closest('.btn-outline-custom')) {
+                const button = e.target.closest('button') || e.target.closest('a');
+                button.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    button.style.transform = 'scale(1)';
+                }, 150);
+            }
+        });
+
+        // Add floating animation to hero image
+        setInterval(() => {
+            const heroImage = document.querySelector('.hero-image');
+            if (heroImage) {
+                heroImage.style.transform = 'translateY(' + (Math.sin(Date.now() * 0.001) * 10) + 'px)';
+            }
+        }, 50);
+
+        // Add particle effect to hero section
+        function createParticles() {
+            const hero = document.querySelector('.hero');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.cssText = `
+                    position: absolute;
+                    width: 4px;
+                    height: 4px;
+                    background: rgba(255, 255, 255, 0.1);
+                    border-radius: 50%;
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                    animation: float ${5 + Math.random() * 10}s infinite ease-in-out;
+                    animation-delay: ${Math.random() * 5}s;
+                `;
+                hero.appendChild(particle);
+            }
+        }
+
+        // Add typewriter effect to hero title
+        function typewriterEffect() {
+            const title = document.querySelector('.hero-title');
+            const text = title.textContent;
+            title.textContent = '';
+            title.style.opacity = '1';
+            
+            let i = 0;
+            const timer = setInterval(() => {
+                if (i < text.length) {
+                    title.textContent += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(timer);
+                }
+            }, 50);
+        }
+
+        // Add counter animation for statistics
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const increment = target / 100;
+                let count = 0;
+                
+                const timer = setInterval(() => {
+                    count += increment;
+                    counter.textContent = Math.floor(count);
+                    
+                    if (count >= target) {
+                        counter.textContent = target;
+                        clearInterval(timer);
+                    }
+                }, 20);
+            });
+        }
+
+        // Add search functionality
+        function searchPuppies() {
+            const searchInput = document.getElementById('search-input');
+            const searchTerm = searchInput.value.toLowerCase();
+            const puppyCards = document.querySelectorAll('.puppy-card');
+            
+            puppyCards.forEach(card => {
+                const puppyName = card.querySelector('.puppy-name').textContent.toLowerCase();
+                const puppyDescription = card.querySelector('.puppy-description').textContent.toLowerCase();
+                
+                if (puppyName.includes(searchTerm) || puppyDescription.includes(searchTerm)) {
+                    card.parentElement.style.display = 'block';
+                } else {
+                    card.parentElement.style.display = 'none';
+                }
+            });
+        }
+
+        // Add form validation
+        function validateContactForm() {
+            const form = document.getElementById('contact-form');
+            const inputs = form.querySelectorAll('input[required], textarea[required]');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    input.classList.remove('is-invalid');
+                }
+            });
+            
+            return isValid;
+        }
+
+        // Add loading states
+        function showLoading(element) {
+            element.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+            element.disabled = true;
+        }
+
+        function hideLoading(element, originalText) {
+            element.innerHTML = originalText;
+            element.disabled = false;
+        }
+
+        // Add notification system
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type} alert-dismissible fade show notification`;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 9999;
+                min-width: 300px;
+                animation: slideIn 0.3s ease;
+            `;
+            
+            notification.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+
+        // Add image lazy loading
+        function lazyLoadImages() {
+            const images = document.querySelectorAll('img[data-src]');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+            
+            images.forEach(img => imageObserver.observe(img));
+        }
+
+        // Add mobile menu toggle
+        function toggleMobileMenu() {
+            const navbar = document.querySelector('.navbar-collapse');
+            navbar.classList.toggle('show');
+        }
+
+        // Add back to top button
+        function createBackToTopButton() {
+            const button = document.createElement('button');
+            button.innerHTML = '<i class="fas fa-arrow-up"></i>';
+            button.className = 'back-to-top';
+            button.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: var(--primary-orange);
+                color: white;
+                border: none;
+                font-size: 18px;
+                cursor: pointer;
+                z-index: 1000;
+                display: none;
+                transition: all 0.3s ease;
+            `;
+            
+            button.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            document.body.appendChild(button);
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 500) {
+                    button.style.display = 'block';
+                } else {
+                    button.style.display = 'none';
+                }
+            });
+        }
+
+        // Initialize all features
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize particles
+            createParticles();
+            
+            // Initialize back to top button
+            createBackToTopButton();
+            
+            // Initialize lazy loading
+            lazyLoadImages();
+            
+            // Show initial notification
+            setTimeout(() => {
+                showNotification('Welcome to Doggywala! Find your perfect puppy companion today.', 'info');
+            }, 2000);
+        });
+
+        // Add CSS animations
+        const additionalStyles = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            .back-to-top:hover {
+                background: #e55a2b !important;
+                transform: translateY(-2px);
+            }
+            
+            .notification {
+                animation: slideIn 0.3s ease;
+            }
+            
+            .lazy {
+                filter: blur(5px);
+                transition: filter 0.3s;
+            }
+            
+            .is-invalid {
+                border-color: #dc3545 !important;
+            }
+            
+            .counter {
+                font-size: 2rem;
+                font-weight: bold;
+                color: var(--primary-orange);
+            }
+        `;
+        
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = additionalStyles;
+        document.head.appendChild(styleSheet);
+    </script>
+</body>
+</html>
